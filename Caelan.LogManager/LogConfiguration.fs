@@ -3,13 +3,18 @@
 open System
 open System.Configuration
 
+[<AllowNullLiteral>]
 type FileWriterElement() =
     inherit ConfigurationElement()
 
-    member val Path = "" with get, set
+    [<ConfigurationProperty("path", IsKey = true, IsRequired = true)>]
+    member t.Path with get() = string(t.["path"])
 
+[<AllowNullLiteral>]
 type LogConfiguration() = 
     inherit ConfigurationSection()
 
     [<ConfigurationProperty("fileWriter", IsKey = true)>]
-    member val Test : FileWriterElement option = None with get, set
+    member __.FileWriter
+        with get() = base.["fileWriter"] :?> FileWriterElement
+        and set (v : FileWriterElement) = base.["fileWriter"] <- v

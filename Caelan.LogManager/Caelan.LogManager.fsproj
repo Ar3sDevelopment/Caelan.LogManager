@@ -51,10 +51,10 @@
     <None Include="Script.fsx" />
     <Compile Include="LogType.fs" />
     <Compile Include="ILogWriter.fs" />
-    <Compile Include="Logger.fs" />
-    <Compile Include="Log.fs" />
-    <Compile Include="FileLogWriter.fs" />
     <Compile Include="LogConfiguration.fs" />
+    <Compile Include="Logger.fs" />
+    <Compile Include="FileLogWriter.fs" />
+    <Compile Include="Log.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

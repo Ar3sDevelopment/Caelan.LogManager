@@ -1,12 +1,19 @@
 ﻿namespace Caelan.LogManager
 
 open System.Collections.Generic
+open System.Configuration
 
 module Log =
-    let private writers = List<ILogWriter>()
+    let mutable private writers = Seq.empty<ILogWriter>
+    let private conf = ConfigurationManager.GetSection("logManager") :?> LogConfiguration
 
-    let private AddWriter writer = 
-        writers.Add(writer)
+    if conf <> null then
+        let fileWriter =
+            match conf.FileWriter with
+            | null -> None
+            | _ -> Some(FileLogWriter(conf.FileWriter.Path))
+
+        writers <- [ fileWriter ] |> Seq.filter (fun t -> t.IsSome) |> Seq.map (fun t -> t.Value :> ILogWriter)
 
     let CurrentLogger<'T>() =
         Logger<'T>(writers)
