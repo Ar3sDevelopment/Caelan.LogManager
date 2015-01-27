@@ -54,6 +54,7 @@
     <Compile Include="ILogWriter.fs" />
     <Compile Include="Logger.fs" />
     <Compile Include="FileLogWriter.fs" />
+    <Compile Include="WriterType.fs" />
     <Compile Include="Log.fs" />
   </ItemGroup>
   <ItemGroup>

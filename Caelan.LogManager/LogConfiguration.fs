@@ -13,6 +13,9 @@ type WriterElement() =
     [<ConfigurationProperty("source", IsKey = true, IsRequired = true)>]
     member t.Source = string (t.["source"])
 
+    [<ConfigurationProperty("format", IsKey = true, IsRequired = false)>]
+    member t.Format = string (t.["format"])
+
 [<AllowNullLiteral>]
 type WriterCollection() = 
     inherit ConfigurationElementCollection()

@@ -6,3 +6,10 @@ type LogType =
     | Warning
     | Error
     | Fatal
+    override t.ToString() = 
+        match t with
+        | Debug -> "DEBUG"
+        | Trace -> "TRACE"
+        | Warning -> "WARNING"
+        | Error -> "ERROR"
+        | Fatal -> "FATAL"

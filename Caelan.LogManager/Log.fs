@@ -6,9 +6,9 @@ open System.Reflection
 open System
 
 module Log = 
-    let private writersTypes = 
-        Assembly.GetExecutingAssembly().GetTypes() 
-        |> Seq.filter (fun t -> typeof<ILogWriter>.IsAssignableFrom(t) && not t.IsInterface)
+    let private writersTypes = [ WriterType.File, typeof<FileLogWriter> ] |> Map.ofList
+    //        Assembly.GetExecutingAssembly().GetTypes() 
+    //        |> Seq.filter (fun t -> typeof<ILogW  riter>.IsAssignableFrom(t) && not t.IsInterface)
     let private conf = ConfigurationManager.GetSection("log") :?> LogConfiguration
     
     let private confWriters = 
@@ -20,7 +20,11 @@ module Log =
     let private writers = 
         match confWriters with
         | None -> Seq.empty<ILogWriter>
-        | Some(ws) -> writersTypes |> Seq.map (fun t -> Activator.CreateInstance(t, ws.Item(t.Name)) :?> ILogWriter)
+        | Some(ws) -> 
+            writersTypes
+            |> Map.map (fun k t -> Activator.CreateInstance(t, ws.Item(k.ToString())) :?> ILogWriter)
+            |> Map.toSeq
+            |> Seq.map snd
     
     let CurrentLogger<'T>() = Logger<'T>(writers)
     let Logger name = Logger(name, writers)
