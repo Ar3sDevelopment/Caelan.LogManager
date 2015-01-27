@@ -14,7 +14,7 @@ type FileLogWriter(path) =
                 if not (String.IsNullOrWhiteSpace(element.Source)) then (this :> ILogWriter).Source <- element.Source
                 if not (String.IsNullOrWhiteSpace(element.Format)) then this.Format <- element.Format
     
-    member this.Write (logType : LogType) message (ex : Exception option) = 
+    member private this.Write (logType : LogType) message (ex : Exception option) = 
         let exMessage = 
             match ex with
             | None -> String.Empty
