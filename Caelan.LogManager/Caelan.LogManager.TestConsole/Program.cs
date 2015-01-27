@@ -1,17 +1,16 @@
 ﻿using System;
-using Caelan.LogManager;
 
 namespace Caelan.LogManager.TestConsole
 {
-	class MainClass
+	public static class MainClass
 	{
-		public static void Main (string[] args)
+		public static void Main(string[] args)
 		{
-			var logger = Log.CurrentLogger<MainClass>();
+			var logger = Log.Logger("MainClass");
 
-			logger.Log (LogType.Debug, "pippo");
+			logger.Log(LogType.Debug, "pippo");
 
-			Console.WriteLine ("Hello World!");
+			Console.WriteLine("Hello World!");
 		}
 	}
 }

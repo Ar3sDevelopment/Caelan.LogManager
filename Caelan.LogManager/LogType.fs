@@ -1,6 +1,6 @@
 ﻿namespace Caelan.LogManager
 
-type LogType =
+type LogType = 
     | Debug
     | Trace
     | Warning
