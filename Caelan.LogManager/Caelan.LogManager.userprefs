@@ -1,0 +1,19 @@
+﻿<Properties StartupItem="Caelan.LogManager.TestConsole/Caelan.LogManager.TestConsole.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench>
+    <Files>
+      <File FileName="Logger.fs" Line="28" Column="28" />
+      <File FileName="ILogWriter.fs" Line="1" Column="1" />
+      <File FileName="LogType.fs" Line="1" Column="1" />
+      <File FileName="Log.fs" Line="25" Column="25" />
+      <File FileName="FileLogWriter.fs" Line="46" Column="46" />
+      <File FileName="LogConfiguration.fs" Line="9" Column="9" />
+      <File FileName="Caelan.LogManager.TestConsole/app.config" Line="50" Column="50" />
+      <File FileName="Caelan.LogManager.TestConsole/Program.cs" Line="19" Column="19" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
