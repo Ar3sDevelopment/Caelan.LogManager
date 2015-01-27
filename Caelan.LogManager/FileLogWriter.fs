@@ -3,7 +3,7 @@
 open System
 open System.IO
 
-type FileLogWriter(path : string) = 
+type FileLogWriter(path) = 
     
     interface ILogWriter with
         member val Source = path with get, set
@@ -14,7 +14,7 @@ type FileLogWriter(path : string) =
                 if not (String.IsNullOrWhiteSpace(element.Source)) then (this :> ILogWriter).Source <- element.Source
                 if not (String.IsNullOrWhiteSpace(element.Format)) then this.Format <- element.Format
     
-    member this.Write (logType : LogType) (message : string) (ex : Exception option) = 
+    member this.Write (logType : LogType) message (ex : Exception option) = 
         let exMessage = 
             match ex with
             | None -> String.Empty

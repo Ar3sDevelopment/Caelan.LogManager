@@ -21,7 +21,12 @@ type Log() =
         | Some(t) -> Some(t.Writers)
     
     static let writersTypes = Dictionary<string, Type>()
-    static do [ WriterType.File.ToString(), typeof<FileLogWriter> ] |> Seq.iter writersTypes.Add
+    
+    static do 
+        [ WriterType.File.ToString(), typeof<FileLogWriter>
+          WriterType.Json.ToString(), typeof<JsonLogWriter> ]
+        |> Seq.iter writersTypes.Add
+    
     static let mutable writers = Seq.empty<ILogWriter>
     
     static let maxLevel = 

@@ -54,11 +54,17 @@
     <Compile Include="ILogWriter.fs" />
     <Compile Include="Logger.fs" />
     <Compile Include="FileLogWriter.fs" />
+    <Compile Include="JsonLogWriter.fs" />
     <Compile Include="WriterType.fs" />
     <Compile Include="Log.fs" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
