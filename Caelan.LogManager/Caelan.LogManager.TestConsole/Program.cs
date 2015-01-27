@@ -30,6 +30,10 @@ namespace Caelan.LogManager.TestConsole
 			var logger = Log.CurrentLogger("MainClass");
 
 			logger.Log(LogType.Debug, "pippo");
+			logger.Log(LogType.Trace, "pippo");
+			logger.Log(LogType.Warning, "pippo");
+			logger.Log(LogType.Error, "pippo");
+			logger.Log(LogType.Fatal, "pippo");
 
 			Console.WriteLine("Hello World!");
 		}

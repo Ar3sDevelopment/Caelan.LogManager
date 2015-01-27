@@ -9,15 +9,25 @@ open System
 [<Sealed>]
 type Log() = 
     
-    static let confWriters = 
+    static let conf = 
         match ConfigurationManager.GetSection("log") :?> LogConfiguration with
         | null -> None
-        | t when t.Writers.Count < 1 -> None
-        | t -> Some(t.Writers)
+        | t -> Some(t)
+    
+    static let confWriters = 
+        match conf with
+        | None -> None
+        | Some(t) when t.Writers.Count < 1 -> None
+        | Some(t) -> Some(t.Writers)
     
     static let writersTypes = Dictionary<string, Type>()
     static do [ WriterType.File.ToString(), typeof<FileLogWriter> ] |> Seq.iter writersTypes.Add
     static let mutable writers = Seq.empty<ILogWriter>
+    
+    static let maxLevel = 
+        match conf with
+        | None -> LogType.Error
+        | Some(t) -> LogType.FromString(t.MaxLevel)
     
     static member Refresh() = 
         writers <- match confWriters with
@@ -34,5 +44,5 @@ type Log() =
         writersTypes.Add(name, t)
         Log.Refresh()
     
-    static member CurrentLogger<'T>() = Logger<'T>(writers)
-    static member CurrentLogger name = Logger(name, writers)
+    static member CurrentLogger<'T>() = Logger<'T>(maxLevel, writers)
+    static member CurrentLogger name = Logger(name, maxLevel, writers)

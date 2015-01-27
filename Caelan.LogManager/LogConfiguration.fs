@@ -12,7 +12,7 @@ type WriterElement() =
     
     [<ConfigurationProperty("source", IsKey = true, IsRequired = false)>]
     member t.Source = string (t.["source"])
-
+    
     [<ConfigurationProperty("format", IsKey = true, IsRequired = false)>]
     member t.Format = string (t.["format"])
 
@@ -30,6 +30,11 @@ type WriterCollection() =
 [<AllowNullLiteral>]
 type LogConfiguration() = 
     inherit ConfigurationSection()
+    
+    [<ConfigurationProperty("maxLevel", IsKey = true, IsRequired = false)>]
+    member __.MaxLevel 
+        with get () = ``base``.["maxLevel"] :?> string
+        and set (v : string) = ``base``.["maxLevel"] <- v
     
     [<ConfigurationProperty("writers", IsDefaultCollection = true, IsKey = true, IsRequired = true)>]
     member __.Writers 

@@ -6,6 +6,7 @@ type LogType =
     | Warning
     | Error
     | Fatal
+    
     override t.ToString() = 
         match t with
         | Debug -> "DEBUG"
@@ -13,3 +14,12 @@ type LogType =
         | Warning -> "WARNING"
         | Error -> "ERROR"
         | Fatal -> "FATAL"
+    
+    static member FromString(s) = 
+        match s with
+        | "DEBUG" -> Debug
+        | "TRACE" -> Trace
+        | "WARNING" -> Warning
+        | "ERROR" -> Error
+        | "FATAL" -> Fatal
+        | _ -> Error
