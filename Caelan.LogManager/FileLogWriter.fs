@@ -29,6 +29,3 @@ type FileLogWriter(path : string) =
     
     member val Format = "[%date] %type - %message %exception%nl" with get, set
     new() = FileLogWriter(String.Empty)
-    new(element) as this = 
-        FileLogWriter()
-        then (this :> ILogWriter).Assign element

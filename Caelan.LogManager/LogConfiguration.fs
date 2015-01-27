@@ -10,7 +10,7 @@ type WriterElement() =
     [<ConfigurationProperty("name", IsKey = true, IsRequired = true)>]
     member t.Name = string (t.["name"])
     
-    [<ConfigurationProperty("source", IsKey = true, IsRequired = true)>]
+    [<ConfigurationProperty("source", IsKey = true, IsRequired = false)>]
     member t.Source = string (t.["source"])
 
     [<ConfigurationProperty("format", IsKey = true, IsRequired = false)>]
