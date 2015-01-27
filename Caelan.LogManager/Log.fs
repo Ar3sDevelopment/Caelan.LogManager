@@ -5,32 +5,34 @@ open System.Configuration
 open System.Reflection
 open System
 
-module Log = 
-    let private writersTypes = Dictionary<string, Type>()
+[<AbstractClass>]
+[<Sealed>]
+type Log() = 
     
-    [ WriterType.File.ToString(), typeof<FileLogWriter> ] |> Seq.iter writersTypes.Add
-    
-    //        Assembly.GetExecutingAssembly().GetTypes() 
-    //        |> Seq.filter (fun t -> typeof<ILogW  riter>.IsAssignableFrom(t) && not t.IsInterface)
-    let private conf = ConfigurationManager.GetSection("log") :?> LogConfiguration
-    
-    let private confWriters = 
-        match conf with
+    static let confWriters = 
+        match ConfigurationManager.GetSection("log") :?> LogConfiguration with
         | null -> None
         | t when t.Writers.Count < 1 -> None
-        | _ -> Some(conf.Writers)
+        | t -> Some(t.Writers)
     
-    let private Writers() = 
-        match confWriters with
-        | None -> Seq.empty<ILogWriter>
-        | Some(ws) -> 
-            writersTypes
-            |> Seq.filter (fun item -> ws.Item(item.Key) <> null)
-            |> Seq.map (fun item -> 
-                   let res = Activator.CreateInstance(item.Value) :?> ILogWriter
-                   res.Assign(ws.Item(item.Key))
-                   res)
+    static let writersTypes = Dictionary<string, Type>()
+    static do [ WriterType.File.ToString(), typeof<FileLogWriter> ] |> Seq.iter writersTypes.Add
+    static let mutable writers = Seq.empty<ILogWriter>
     
-    let AddWriter name t = writersTypes.Add(name, t)
-    let CurrentLogger<'T>() = Logger<'T>(Writers())
-    let Logger name = Logger(name, Writers())
+    static member Refresh() = 
+        writers <- match confWriters with
+                   | None -> Seq.empty<ILogWriter>
+                   | Some(ws) -> 
+                       writersTypes
+                       |> Seq.filter (fun item -> ws.Item(item.Key) <> null)
+                       |> Seq.map (fun item -> 
+                              let res = Activator.CreateInstance(item.Value) :?> ILogWriter
+                              res.Assign(ws.Item(item.Key))
+                              res)
+    
+    static member AddWriter name t = 
+        writersTypes.Add(name, t)
+        Log.Refresh()
+    
+    static member CurrentLogger<'T>() = Logger<'T>(writers)
+    static member CurrentLogger name = Logger(name, writers)

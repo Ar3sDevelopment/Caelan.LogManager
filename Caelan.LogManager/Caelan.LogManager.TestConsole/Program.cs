@@ -27,7 +27,7 @@ namespace Caelan.LogManager.TestConsole
 		{
 			Log.AddWriter("Test", typeof(TestWriter));
 
-			var logger = Log.Logger("MainClass");
+			var logger = Log.CurrentLogger("MainClass");
 
 			logger.Log(LogType.Debug, "pippo");
 
