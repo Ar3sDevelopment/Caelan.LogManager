@@ -1,15 +1,18 @@
 ﻿<Properties StartupItem="Caelan.LogManager.TestConsole/Caelan.LogManager.TestConsole.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Log.fs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
       <File FileName="Logger.fs" Line="1" Column="1" />
       <File FileName="ILogWriter.fs" Line="1" Column="1" />
       <File FileName="LogType.fs" Line="1" Column="1" />
-      <File FileName="Log.fs" Line="13" Column="13" />
-      <File FileName="FileLogWriter.fs" Line="1" Column="1" />
+      <File FileName="Log.fs" Line="5" Column="5" />
+      <File FileName="FileLogWriter.fs" Line="20" Column="20" />
       <File FileName="LogConfiguration.fs" Line="1" Column="1" />
       <File FileName="Caelan.LogManager.TestConsole/app.config" Line="1" Column="1" />
       <File FileName="Caelan.LogManager.TestConsole/Program.cs" Line="1" Column="1" />
+      <File FileName="DatabaseLogWriter.fs" Line="35" Column="35" />
+      <File FileName="JsonLogWriter.fs" Line="34" Column="34" />
+      <File FileName="LogObject.fs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
